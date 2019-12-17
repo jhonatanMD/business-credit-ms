@@ -1,5 +1,7 @@
 package com.business.ms.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,14 +10,15 @@ public class EntityBusinessCredit {
 	@Id
 	private String codCur;
 	
-	private String numAcc;
+	private String numCred;
 	
 	private Double cash;
 	
-	private String docCli;
+	private Double cashPay;
 	
 	private CustomerEntity  customer;
 	
+	private List<EntityTransaction> transactions;
 
 
 	public String getCodCur() {
@@ -26,12 +29,12 @@ public class EntityBusinessCredit {
 		this.codCur = codCur;
 	}
 
-	public String getNumAcc() {
-		return numAcc;
+	public String getNumCred() {
+		return numCred;
 	}
 
-	public void setNumAcc(String numAcc) {
-		this.numAcc = numAcc;
+	public void setNumCred(String numCred) {
+		this.numCred = numCred;
 	}
 
 	public Double getCash() {
@@ -42,14 +45,12 @@ public class EntityBusinessCredit {
 		this.cash = cash;
 	}
 
-
-
-	public String getDocCli() {
-		return docCli;
+	public Double getCashPay() {
+		return cashPay;
 	}
 
-	public void setDocCli(String docCli) {
-		this.docCli = docCli;
+	public void setCashPay(Double cashPay) {
+		this.cashPay = cashPay;
 	}
 
 	public CustomerEntity getCustomer() {
@@ -60,5 +61,14 @@ public class EntityBusinessCredit {
 		this.customer = customer;
 	}
 
+	public List<EntityTransaction> getTransactions() {
+		return transactions;
+	}
 
+	public void setTransactions(List<EntityTransaction> transactions) {
+		this.transactions = transactions;
+	}
+
+
+	
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.business.ms.model.EntityBusinessCredit;
-import com.business.ms.service.BusinessCreditServiceImple;
+import com.business.ms.service.IBusinessCreditService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 public class ControllerBusinessCredit {
 	
 	@Autowired
-	BusinessCreditServiceImple imple;
+	IBusinessCreditService imple;
 	
 	@GetMapping("/getBusinessCredit")
 	Flux<EntityBusinessCredit> getBusinessCredit(){
@@ -49,18 +49,12 @@ public class ControllerBusinessCredit {
 		return imple.dltEntityBusinessCredit(id);
 	}
 	
-	@PostMapping("/updTransancionesBusinessCredit/{doc}/{tipo}/{cash}")
-	public Mono<EntityBusinessCredit> updTransancionesBusinessCredit(@PathVariable("doc") String doc 
+	@PostMapping("/updTransancionesBusinessCredit/{numCred}/{tipo}/{cash}")
+	public Mono<EntityBusinessCredit> updTransancionesBusinessCredit(@PathVariable("numCred") String numCred 
 			,@PathVariable("tipo") String tipo ,@PathVariable("cash")  Double cash){
-			return imple.findEntityBusinessCreditDocCli(doc)
-					.flatMap(p ->{
-						if(tipo.equals("r") && p.getCash() >= cash) {
-							p.setCash(p.getCash() - cash);
-						}else if (tipo.equals("d")){
-							p.setCash( p.getCash() + cash);
-						}
-				return imple.updEntityBusinessCredit(p);
-				});
+			return imple.transactionCreditBusiness(numCred, tipo, cash);
+			
+					
 
 	}
 
