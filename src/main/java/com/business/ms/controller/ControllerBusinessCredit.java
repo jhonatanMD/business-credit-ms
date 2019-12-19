@@ -29,7 +29,7 @@ public class ControllerBusinessCredit {
 	}
 	
 	@GetMapping("/getBusinessCrediDoc/{docCli}")
-	Mono<EntityBusinessCredit> getBusinessCrediDoc(@PathVariable("docCli") String docCli){
+	Flux<EntityBusinessCredit> getBusinessCrediDoc(@PathVariable("docCli") String docCli){
 		return imple.findEntityBusinessCreditDocCli(docCli);
 	}
 	@PostMapping("/postBusinessCredit")

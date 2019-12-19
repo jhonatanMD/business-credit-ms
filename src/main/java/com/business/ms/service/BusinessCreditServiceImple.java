@@ -49,7 +49,7 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 	}
 
 	@Override
-	public Mono<EntityBusinessCredit> findEntityBusinessCreditDocCli(String docCli) {
+	public Flux<EntityBusinessCredit> findEntityBusinessCreditDocCli(String docCli) {
 		// TODO Auto-generated method stub
 		return repository.findByDocCli(docCli);
 	}

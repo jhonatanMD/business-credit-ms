@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.business.ms.model.EntityBusinessCredit;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -13,7 +14,7 @@ public interface IBusinessCreditRepository extends ReactiveMongoRepository<Entit
 
 		
 		@Query("{'customer.Ruc':?0}")
-		Mono<EntityBusinessCredit> findByDocCli(String docCli);
+		Flux<EntityBusinessCredit> findByDocCli(String docCli);
 		
 		Mono<EntityBusinessCredit> findByNumCred(String numCred);
 		

@@ -15,7 +15,7 @@ public interface IBusinessCreditService {
 	
 	Mono<Void> dltEntityBusinessCredit(String id);
 	
-	Mono<EntityBusinessCredit> findEntityBusinessCreditDocCli(String docCli);
+	Flux<EntityBusinessCredit> findEntityBusinessCreditDocCli(String docCli);
 	
 	Mono<EntityBusinessCredit> transactionCreditBusiness(String numCred,String tipo,Double cash);
 }
