@@ -1,5 +1,7 @@
 package com.business.ms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,10 +54,13 @@ public class ControllerBusinessCredit {
 	@PostMapping("/updTransancionesBusinessCredit/{numCred}/{tipo}/{cash}")
 	public Mono<EntityBusinessCredit> updTransancionesBusinessCredit(@PathVariable("numCred") String numCred 
 			,@PathVariable("tipo") String tipo ,@PathVariable("cash")  Double cash){
-			return imple.transactionCreditBusiness(numCred, tipo, cash);
-			
-					
-
+			return imple.transactionCreditBusiness(numCred, tipo, cash);			
 	}
 
+	@PostMapping("/creditBusinessByNumDocList/{status}")
+	public Flux<EntityBusinessCredit> creditBusinessByNumDocList(@RequestBody List<String> numDoc
+			,@PathVariable("status") String status){
+		return imple.findEntityBusinessCreditDocCliList(numDoc,status);
+		
+	}
 }

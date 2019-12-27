@@ -1,5 +1,7 @@
 package com.business.ms.service;
 
+import java.util.List;
+
 import com.business.ms.model.EntityBusinessCredit;
 
 import reactor.core.publisher.Flux;
@@ -16,6 +18,8 @@ public interface IBusinessCreditService {
 	Mono<Void> dltEntityBusinessCredit(String id);
 	
 	Flux<EntityBusinessCredit> findEntityBusinessCreditDocCli(String docCli);
+	
+	Flux<EntityBusinessCredit> findEntityBusinessCreditDocCliList(List<String> docCli , String status);
 	
 	Mono<EntityBusinessCredit> transactionCreditBusiness(String numCred,String tipo,Double cash);
 }

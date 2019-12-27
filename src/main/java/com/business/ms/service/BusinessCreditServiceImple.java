@@ -80,6 +80,12 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 	});
 	}
 
+	@Override
+	public Flux<EntityBusinessCredit> findEntityBusinessCreditDocCliList(List<String> docCli, String status) {
+		// TODO Auto-generated method stub
+		return repository.findByDocCliList(docCli, status);
+	}
+
 	
 
 }

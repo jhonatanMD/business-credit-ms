@@ -20,7 +20,8 @@ public class EntityBusinessCredit {
 	
 	private List<EntityTransaction> transactions;
 
-
+	private String status;
+	
 	public String getCodCur() {
 		return codCur;
 	}
@@ -67,6 +68,14 @@ public class EntityBusinessCredit {
 
 	public void setTransactions(List<EntityTransaction> transactions) {
 		this.transactions = transactions;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
