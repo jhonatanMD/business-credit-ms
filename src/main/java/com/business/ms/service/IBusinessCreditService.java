@@ -1,5 +1,6 @@
 package com.business.ms.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.business.ms.model.EntityBusinessCredit;
@@ -22,4 +23,6 @@ public interface IBusinessCreditService {
 	Flux<EntityBusinessCredit> findEntityBusinessCreditDocCliList(List<String> docCli , String status);
 	
 	Mono<EntityBusinessCredit> transactionCreditBusiness(String numCred,String tipo,Double cash);
+	
+	Flux<EntityBusinessCredit> findByBankAndDateOpenBetween(String bank,String dt1 ,String dt2) throws ParseException;
 }

@@ -1,5 +1,6 @@
 package com.business.ms.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class ControllerBusinessCredit {
 	@GetMapping("/getBusinessCredit")
 	Flux<EntityBusinessCredit> getBusinessCredit(){
 		return imple.allEntityBusinessCredit();
+	}
+	
+	@GetMapping("/getBusinessDates/{dt1}/{dt2}/{bank}")
+	Flux<EntityBusinessCredit> getBusinessDates(@PathVariable("dt1") String dt1
+			,@PathVariable("dt2") String dt2,@PathVariable("bank") String bank) throws ParseException{	
+		return imple.findByBankAndDateOpenBetween(bank, dt1, dt2);
 	}
 	
 	@GetMapping("/getBusinessCrediDoc/{docCli}")

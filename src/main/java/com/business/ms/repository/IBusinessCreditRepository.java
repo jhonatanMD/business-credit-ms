@@ -1,5 +1,6 @@
 package com.business.ms.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.Query;
@@ -23,5 +24,5 @@ public interface IBusinessCreditRepository extends ReactiveMongoRepository<Entit
 		Flux<EntityBusinessCredit> findByDocCliList(List<String> docCli , String status);
 		
 		Mono<EntityBusinessCredit> findByNumCred(String numCred);
-		
+		Flux<EntityBusinessCredit> findByBankAndDateOpenBetween(String bank,Date dt1 ,Date dt2) ;
 }

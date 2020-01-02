@@ -1,15 +1,19 @@
 package com.business.ms.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.business.ms.model.EntityBusinessCredit;
 import com.business.ms.model.EntityTransaction;
 import com.business.ms.repository.IBusinessCreditRepository;
+import com.business.ms.webclient.CallWebClient;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,9 +23,14 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 	@Autowired
 	IBusinessCreditRepository repository;
 	
+	@Autowired
+	@Qualifier("webClient")
+	CallWebClient client;
+	
+	List<String> docs;
 	EntityTransaction transaction;
 	List<EntityTransaction> listTransaction;
-	Date dt = new Date();
+	SimpleDateFormat format;
 	
 	
 	@Override
@@ -33,7 +42,16 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 	@Override
 	public Mono<EntityBusinessCredit> saveEntityBusinessCredit(EntityBusinessCredit businessCredi) {
 		// TODO Auto-generated method stub
-		return repository.save(businessCredi);
+		docs = new ArrayList<>();
+		docs.add(businessCredi.getCustomer().getRuc());
+		
+	/*	return client.responde(docs).flatMap(res ->{
+			if(res.getMsj().equals("")) {*/
+				return repository.save(businessCredi);
+		/*	}else {
+				return Mono.empty();
+			}
+		});*/
 	}
 
 	@Override
@@ -69,7 +87,7 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 			transaction.setType(tipo);
 			 transaction.setCashO(cash);
 			 transaction.setCashT(p.getCash());
-			 transaction.setDateTra(dt);
+			 transaction.setDateTra(new Date());
 			listTransaction = new ArrayList<>();
 			p.getTransactions().forEach(transac-> {
 				listTransaction.add(transac);
@@ -84,6 +102,14 @@ public class BusinessCreditServiceImple implements IBusinessCreditService {
 	public Flux<EntityBusinessCredit> findEntityBusinessCreditDocCliList(List<String> docCli, String status) {
 		// TODO Auto-generated method stub
 		return repository.findByDocCliList(docCli, status);
+	}
+
+	@Override
+	public Flux<EntityBusinessCredit> findByBankAndDateOpenBetween(String bank, String dt1, String dt2)
+			throws ParseException {
+		// TODO Auto-generated method stub
+		format = new SimpleDateFormat("yyyy-MM-dd");
+		return repository.findByBankAndDateOpenBetween(bank, format.parse(dt1), format.parse(dt2));
 	}
 
 	

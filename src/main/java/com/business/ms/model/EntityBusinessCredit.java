@@ -1,9 +1,15 @@
 package com.business.ms.model;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Document(collection = "BusinessCredit")
 public class EntityBusinessCredit {
@@ -21,6 +27,12 @@ public class EntityBusinessCredit {
 	private List<EntityTransaction> transactions;
 
 	private String status;
+	
+	private String bank; 
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
+	@NotNull
+	private Date dateOpen;
 	
 	public String getCodCur() {
 		return codCur;
@@ -76,6 +88,14 @@ public class EntityBusinessCredit {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 
 
